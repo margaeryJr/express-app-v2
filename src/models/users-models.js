@@ -8,32 +8,23 @@ const createNewUser = (body) => {
 }
 
 const getAllUsers = () => {
-   const SQLQuery = 'SELECT * FROM users';
+   const SQLQuery = 'SELECT id, fullname, username, email FROM users';
    return dbPool.execute(SQLQuery);
 }
 
 const getUser = (id) => {
-    const SQLQuery = `SELECT * FROM users
-                        WHERE id=${id}`;
+    const SQLQuery = `SELECT id, fullname, username, email FROM users WHERE id = ?`;
     return dbPool.execute(SQLQuery, [id]);
 }
 
-const updateUser = (body, id) => {
-    const SQLQuery = `UPDATE users 
-                    SET name='${body.name}', email='${body.email}' 
-                    WHERE id=${id}`;
-    return dbPool.execute(SQLQuery);
+const getUserByName = (username) => {
+    const SQLQuery = `SELECT * FROM users WHERE username = ? OR email = ? LIMIT 1`;
+    return dbPool.execute(SQLQuery, [username, username]);
 }
 
-const deleteUser = (id) => {
-    const SQLQuery = `DELETE FROM users
-                        WHERE id=${id}`;
-    return dbPool.execute(SQLQuery);
-}
 module.exports = {
+    createNewUser,
     getAllUsers,
     getUser,
-    createNewUser,
-    updateUser,
-    deleteUser
+    getUserByName
 }
