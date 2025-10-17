@@ -6,6 +6,7 @@ const loginUser = async (req, res) => {
     try {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ message: 'Masukkan username/email dan password' });
+    console.log('Percobaan login di user:', username);
 
     const [rows] = await usersModel.getUserByName(username);
     const user = rows[0];
