@@ -5,13 +5,18 @@ const adminMiddleware = require('../middleware/admin.js');
 const router = express.Router();
 
 
-router.get('/', authMiddleware, adminMiddleware, userController.getAllUsers);
+router.post('/register', userController.createNewUser);
+router.get('/verify', userController.verifyEmail);
+router.post('/login', userController.loginUser);
+
 router.get('/protected', authMiddleware, (req, res) => {
   res.json({ message: 'Ini route proteksi', user: req.user });
 });
-router.post('/login', userController.loginUser);
+
+router.get('/', authMiddleware, userController.getAllUsers);
 router.get('/:id', authMiddleware, userController.getUser);
-router.post('/register', userController.createNewUser);
+
+
 
 
 

@@ -1,3 +1,4 @@
+/*
 const adminMiddleware = (req, res, next) => {
   if (req.user.role !== 'admin') {
     return res.status(403).json({ message: 'Akses ditolak. Admin only.' });
@@ -5,4 +6,4 @@ const adminMiddleware = (req, res, next) => {
   next();
 };
 
-module.exports = adminMiddleware;   
+module.exports = adminMiddleware;   */
