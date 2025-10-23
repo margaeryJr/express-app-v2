@@ -141,14 +141,14 @@ const verifyEmail = async (req, res) => {
     const [rows] = await usersModel.findUserByVerifyToken(token);
 
     if (!rows[0]) {
-      return res.status(400).send('<h3>Token tidak valid atau sudah digunakan.</h3>');
+      return res.status(400).send('<h3>Invalid Verification Token</h3>');
     }
 
     await usersModel.verifyUser(rows[0].id);
 
     console.log('User berhasil diverifikasi:', rows[0].email);
     
-    res.send('<h3>Verifikasi berhasil! Akun Anda sudah aktif!</h3>');
+    res.send('<h3>Email Verified Succesfully</h3>');
   } catch (error) {
     console.error('Error saat verifikasi:', error);
     res.status(500).send('<h3>Server error.</h3>');
@@ -157,7 +157,7 @@ const verifyEmail = async (req, res) => {
 
 
 module.exports = {
-  rootEndpoint,
+    rootEndpoint,
     createNewUser,
     verifyEmail,
     getAllUsers,

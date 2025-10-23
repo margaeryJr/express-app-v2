@@ -12,9 +12,10 @@ app.use(express.json());
 
 app.use('/users', usersRoutes);
 app.use('/movies', movieRoutes);
+app.use('/uploads', express.static('uploads'));
 
 app.use('/', rootEndpoint);
 
 app.listen(PORT, () => {
     console.log(`Server running in PORT ${PORT}`);
-})
+});

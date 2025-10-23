@@ -5,13 +5,13 @@ const getMovies = ({ search, sort, limit, order }) => {
   let SQLQuery = `SELECT id, title, genre FROM movies WHERE 1=1`;
   const params = [];
 
-  // search
+  // untuk search
   if (search) {
     SQLQuery += ` AND (title LIKE ? OR genre LIKE ?)`;
     params.push(`%${search}%`, `%${search}%`);
   }
 
-  // sorting
+  // untuk sorting
   const sortColumn = sort && ['title', 'genre'].includes(sort)
     ? sort
     : 'id'; 
@@ -19,7 +19,7 @@ const getMovies = ({ search, sort, limit, order }) => {
   const sortOrder = order === 'desc' ? 'DESC' : 'ASC';
   SQLQuery += ` ORDER BY ${sortColumn} ${sortOrder}`;
 
-  // limit
+  // untuk limit
   if (limit) {
     SQLQuery += ` LIMIT ?`;
     params.push(parseInt(limit));
@@ -28,6 +28,4 @@ const getMovies = ({ search, sort, limit, order }) => {
   return dbPool.execute(SQLQuery, params);
 };
 
-module.exports = {
-  getMovies
-};
+module.exports = getMovies;
